@@ -32,7 +32,7 @@ def fill_cell(T, i, j, string, is_word):
             print("Split from " + str(split + 1) + " to " +  str(j) + " returns " + str(T.get(split + 1, j).value))
 
             if T.get(i, split).value and T.get(split+1, j).value:
-                 print(string[i:j + 1] + " can be split at split " + str(split))
+                 print(string[i:j + 1] + " can be split after index " + str(split)) + " into " + string[i:split+1] + ", " + string[split+1:j+1]
                  return RespaceTableCell(True, split)
 
     return RespaceTableCell(False, None)
