@@ -17,23 +17,29 @@ class RespaceTableCell:
 # Inputs: the dynamic programming table, indices i, j into the dynamic programming table, the string being respaced, and an "is_word" function.
 # Returns a RespaceTableCell to put at position (i,j)
 def fill_cell(T, i, j, string, is_word):
-    #YOUR CODE HERE
+
+    print(str(i) + "," + str(j))
 
     if is_word(string[i:j+1]):
+        print(string[i:j+1] + " is a word!")
         return RespaceTableCell(True, j) #double check this
 
     else:
-        for split in range(i,j):
-            if T.get(i,split) and T.get(split+1,j):
-                return RespaceTableCell(True, split)
+        for split in range(i, j):
+            print(str(i) + "," + str(j) + "," + str(split))
+
+            print("Split from " + str(i) + " to " + str(split) + " returns " + str(T.get(i, split).value))
+            print("Split from " + str(split + 1) + " to " +  str(j) + " returns " + str(T.get(split + 1, j).value))
+
+            if T.get(i, split).value and T.get(split+1, j).value:
+                 print(string[i:j + 1] + " can be split at split " + str(split))
+                 return RespaceTableCell(True, split)
 
     return RespaceTableCell(False, None)
                   
 # Inputs: N, the size of the list being respaced
 # Outputs: a list of (i,j) tuples indicating the order in which the table should be filled.
 def cell_ordering(N):
-
-    print(N)
 
     order_list = []
 
