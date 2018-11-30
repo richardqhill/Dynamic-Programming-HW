@@ -1,7 +1,3 @@
-generated_positive_A;a,am,maze,zen,no;amazeno;a maze no;
-
-
-
 generated_positive_0;suse,isle,sell,wars,proud,flood,sail,mar,depot,pda;proudsellsailsellproud;proud sell sail sell proud;
 generated_positive_1;sanyo,dirty,gate,pixel,demo,maui,year,shame,seats,oval;ovalovaldirtyyeardirty;oval oval dirty year dirty;
 generated_positive_2;users,clips,first,euros,seem,eyed,craig,hill,hire,dave;craigfirstcraighirehire;craig first craig hire hire;

@@ -18,21 +18,21 @@ class RespaceTableCell:
 # Returns a RespaceTableCell to put at position (i,j)
 def fill_cell(T, i, j, string, is_word):
 
-    print(str(i) + "," + str(j))
+    #print(str(i) + "," + str(j))
 
     if is_word(string[i:j+1]):
-        print(string[i:j+1] + " is a word!")
+        #print(string[i:j+1] + " is a word!")
         return RespaceTableCell(True, j) #double check this
 
     else:
         for split in range(i, j):
-            print(str(i) + "," + str(j) + "," + str(split))
+            #print(str(i) + "," + str(j) + "," + str(split))
 
-            print("Split from " + str(i) + " to " + str(split) + " returns " + str(T.get(i, split).value))
-            print("Split from " + str(split + 1) + " to " +  str(j) + " returns " + str(T.get(split + 1, j).value))
+            #print("Split from " + str(i) + " to " + str(split) + " returns " + str(T.get(i, split).value))
+            #print("Split from " + str(split + 1) + " to " +  str(j) + " returns " + str(T.get(split + 1, j).value))
 
             if T.get(i, split).value and T.get(split+1, j).value:
-                 print(string[i:j + 1] + " can be split after index " + str(split)) + " into " + string[i:split+1] + ", " + string[split+1:j+1]
+                 #print(string[i:j + 1] + " can be split after index " + str(split)) + " into " + string[i:split+1] + ", " + string[split+1:j+1]
                  return RespaceTableCell(True, split)
 
     return RespaceTableCell(False, None)
@@ -51,18 +51,46 @@ def cell_ordering(N):
         for i in range(0, N-j):
             order_list.append((i,i+j))
 
-    print(order_list)
-
     return order_list
 
 # Input: a filled dynamic programming table.
 # (See instructions.pdf for more on the dynamic programming skeleton)
 # Return the respaced string, or None if there is no respacing.
 def respace_from_table(s, table):
-    #YOUR CODE HERE
+
+    if table.get(0,len(s)-1).value is False:
+        return None
+
+    respaced_string = s
+    space_list = []
+    indexes_that_need_spaces(0, len(s)-1, space_list, table)
+    space_list.sort()
+
+    spaces_added = 0
+
+    for i in range(len(space_list)):
+        respaced_string = respaced_string[0:(space_list[i]+1+spaces_added)] + " " + respaced_string[(space_list[i]+1+spaces_added):]
+        spaces_added += 1
+
+    return respaced_string
 
 
-    return None
+
+def indexes_that_need_spaces(i, j, space_list, table):
+
+    split_index = table.get(i, j).index
+
+    if split_index == j:
+        return
+
+    else:
+        space_list.append(split_index)
+        indexes_that_need_spaces(i, split_index, space_list, table)
+        indexes_that_need_spaces(split_index + 1, j, space_list, table)
+
+    return space_list
+
+
 
 if __name__ == "__main__":
     # Example usage.
