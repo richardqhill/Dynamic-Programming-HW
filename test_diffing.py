@@ -38,6 +38,7 @@ def test_diffing(testcase):
     
     try:
         fill_with_test(D, s=s, t=t, cost=D.cost_functor.cost)
+        a = 1
     except:
         outputString += "Exception encountered when filling dynamic-programming table:\n"
         outputString += traceback.format_exc()
@@ -76,7 +77,7 @@ def test_diffing(testcase):
         if align_s[i] == '-' and align_t[i] == '-':
             outputString += "At position %d, both align_s and align_t were 't'. align_s was\n\t%s\nand align_t was\n\t%s\n"%(i,align_s,align_t)
             return outputString
-        total_cost += D.cost_functor.cost(align_s[i],align_t[i])
+        total_cost += D.cost_functor.cost(align_s[i], align_t[i])
 
     if total_cost != cost:
         outputString += "The alignment given by align_s:\n\t%s\nand align_t\n\t%s\nhas cost %d, but diffing code says it has cost %d.\n"%(align_s, align_t, total_cost, cost)
